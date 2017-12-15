@@ -1,0 +1,13 @@
+
+<div class="jumbotron">
+    <h1>Fetch title!</h1>
+    <p>Enter any url below and this will fetch the title for you!</p>
+    <div class="form-group">
+        <label for="url">Url:</label>
+        <input (keyup.enter)="onSubmit()" type="text" class="form-control" id="url" [(ngModel)]="url">
+    </div>
+    <div>
+      <span *ngIf="title">Title: {{title | async}}</span>
+    </div>
+</div>
+
