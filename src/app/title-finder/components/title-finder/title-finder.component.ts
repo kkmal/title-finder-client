@@ -14,28 +14,33 @@ export class TitleFinderComponent  {
   public title: TitleFinderModel;
   public makingCall: boolean;
   public invalidInput: boolean;
-  public readonly errorMessage: string =
-    'Url must start with https:// or http:// and end in a  valid domain. Example: https://google.com or https://www.google.com';
+  public readonly errorMessage =
+    'Invalid URL - must be in the correct protocol and domain format. Example: https://google.com or http://www.google.com';
+
+  public proto = 'https://';
+
+  private internalUrl = '';
 
   constructor(private titleFinderService: TitleFinderService) { }
 
   public onSubmit(): void {
+    this.internalUrl = this.proto + this.url;
     if (!this.validateInput()) {
       return;
     }
     this.invalidInput = false;
     this.makingCall = true;
-    this.titleFinderService.getTitle(this.url).subscribe((response: TitleFinderModel) => {
+    this.titleFinderService.getTitle(this.internalUrl).subscribe((response: TitleFinderModel) => {
       this.title = response;
       this.makingCall = false;
     });
   }
 
   private validateInput(): boolean {
-    if (this.url && this.url.length > 0) {
+    if (this.internalUrl && this.internalUrl.length > 0) {
       const regex = new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 
-      if (this.url.match(regex)) {
+      if (this.internalUrl.match(regex)) {
         return true;
       }
     }

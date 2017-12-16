@@ -32,6 +32,7 @@ describe('TitleFinderComponent', () => {
   describe('onSubmit()', () => {
     it('should not validate the url because input is empty', () => {
       spyOn(titleFinderService, 'getTitle');
+      component.proto = '';
       component.url = '';
       component.onSubmit();
       expect(titleFinderService.getTitle).toHaveBeenCalledTimes(0);
@@ -39,6 +40,7 @@ describe('TitleFinderComponent', () => {
     });
     it('should not validate the url because input is not valid protocol', () => {
       spyOn(titleFinderService, 'getTitle');
+      component.proto = '';
       component.url = 'google.com';
       component.onSubmit();
       expect(titleFinderService.getTitle).toHaveBeenCalledTimes(0);
@@ -51,7 +53,8 @@ describe('TitleFinderComponent', () => {
         title: 'Google',
         errorMessage: ''
       }));
-      component.url = 'https://google.com';
+      component.proto = 'https://';
+      component.url = 'google.com';
       component.onSubmit();
       expect(component.makingCall).toEqual(false);
       expect(component.invalidInput).toEqual(false);

@@ -16,3 +16,26 @@
   min-height: 40px;
   color: red;
 }
+
+.error {
+  margin-top: 20px;
+}
+
+.input-group-btn-select {
+  width: 100px;
+}
+
+.input-select {
+  background-color: lightslategray;
+  color: black;
+  font-weight: bold;
+  border: 0px;
+}
+
+.input-no-left-margin {
+  margin-left: 0px;
+}
+
+select:active, select:hover {
+  outline: white;
+}
