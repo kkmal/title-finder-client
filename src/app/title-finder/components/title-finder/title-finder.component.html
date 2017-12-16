@@ -1,13 +1,28 @@
-
 <div class="jumbotron">
-    <h1>Fetch title!</h1>
-    <p>Enter any url below and this will fetch the title for you!</p>
-    <div class="form-group">
-        <label for="url">Url:</label>
-        <input (keyup.enter)="onSubmit()" type="text" class="form-control" id="url" [(ngModel)]="url">
+  <h1>Fetch title!</h1>
+  <p>Enter any url below and this will fetch the title for you!</p>
+  <div class="form-group">
+    <label for="url">Url:</label>
+    <input (keyup.enter)="onSubmit()" (blur)="onSubmit()" type="text" class="form-control" id="url" [(ngModel)]="url">
+  </div>
+  <div *ngIf="!makingCall && !invalidInput">
+    <div *ngIf="title?.valid" class="alert alert-success">
+      <strong>Title: </strong>
+      {{title?.title}}
     </div>
-    <div>
-      <span *ngIf="title">Title: {{title | async}}</span>
-    </div>
-</div>
 
+    <div *ngIf="!title?.valid && title?.errorMessage?.length" class="alert alert-danger" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {{title?.errorMessage}}
+    </div>
+  </div>
+  <div *ngIf="makingCall">
+      <span class="glyphicon glyphicon-refresh spinning"></span>
+  </div>
+  <div *ngIf="invalidInput" class="error-section">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {{errorMessage}}
+  </div>
+</div>

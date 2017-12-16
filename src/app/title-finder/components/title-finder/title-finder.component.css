@@ -1,0 +1,18 @@
+.jumbotron {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.glyphicon.spinning {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1) rotate(360deg); }
+}
+
+.error-section {
+  min-height: 40px;
+  color: red;
+}
